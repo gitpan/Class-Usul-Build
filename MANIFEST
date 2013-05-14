@@ -1,0 +1,24 @@
+Build.PL
+Changes
+inc/Bob.pm
+inc/CPANTesting.pm
+inc/SubClass.pm
+lib/Class/Usul/Build.pm
+lib/Class/Usul/Build/InstallActions.pm
+lib/Class/Usul/Build/Plugin/Debian.pm
+lib/Class/Usul/Build/Questions.pm
+lib/Class/Usul/Build/VCS.pm
+LICENSE
+MANIFEST			This list of files
+META.json
+META.yml
+README
+t/01always_pass.t
+t/02pod.t
+t/03podcoverage.t
+t/04critic.t
+t/05kwalitee.t
+t/06yaml.t
+t/07podspelling.t
+t/10test_script.t
+SIGNATURE    Added here by Module::Build

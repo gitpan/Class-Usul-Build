@@ -1,0 +1,50 @@
+This file contains message digests of all files listed in MANIFEST,
+signed via the Module::Signature module, version 0.66.
+
+To verify the content in this distribution, first make sure you have
+Module::Signature installed, then type:
+
+    % cpansign -v
+
+It will check each file's integrity, as well as the signature's
+validity.  If "==> Signature verified OK! <==" is not displayed,
+the distribution may already have been compromised, and you should
+not run its Makefile.PL or Build.PL.
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+SHA1 7f07e11c672d1e0d7dde8ca48f59ef9faba9ca9c Build.PL
+SHA1 eb84de9863fd53bfe2d6e7df7c98d1794317ec00 Changes
+SHA1 2cb3db9aaa5b51c4eeaaeaeb04be26599d7322c4 LICENSE
+SHA1 3072fd9e45a7474a7454ce498a84417732d31364 MANIFEST
+SHA1 c8f3eef07dca45364484ca8ded5e7b7b351dd5f3 META.json
+SHA1 b519ca5b4f57227beae66fae7e90746bc5b13787 META.yml
+SHA1 10d579f8ae025ae9894dbd237b6c6e5d2a5bf193 README
+SHA1 2dad6b015a19acb067ac9b3d677292796ecdb1c9 inc/Bob.pm
+SHA1 b2daf2d6d3f2158b33d84a79ea725c922f508718 inc/CPANTesting.pm
+SHA1 3e461b4687dcea7680dc96761ecd703556759063 inc/SubClass.pm
+SHA1 4c11f3ef31ff759d673eec0ff5e0d2b6fbeb30a9 lib/Class/Usul/Build.pm
+SHA1 d73eb8e763df56f1771ba7a3a2b712a3228b7299 lib/Class/Usul/Build/InstallActions.pm
+SHA1 af61ca63d6527eda2079f1588554a87a7501a91e lib/Class/Usul/Build/Plugin/Debian.pm
+SHA1 8aaa35cd021c5a78d30ad3fac9e3ce025a86fe53 lib/Class/Usul/Build/Questions.pm
+SHA1 e0c6c026c0d314eda468a4c08114af03897ec56b lib/Class/Usul/Build/VCS.pm
+SHA1 6bd934b0e01e1e5f0c23e768050fde8ec213cfe4 t/01always_pass.t
+SHA1 a57543a55b00efd0d7cce5fb69744de053fa81b6 t/02pod.t
+SHA1 ad5a66f047365ec8d0bda242233f1b3353c01797 t/03podcoverage.t
+SHA1 9cb148df21b77938d9ccdcd83fc0ef467b86fd55 t/04critic.t
+SHA1 710ae7c2d07b133a8204e0a814b09ec9b409d8c7 t/05kwalitee.t
+SHA1 07c357220e95f82d2170ff4504ab1e78b92caa1f t/06yaml.t
+SHA1 35d3664f6e9a9f22f816af389b3ff5645916ace9 t/07podspelling.t
+SHA1 a889bbfeb0eb08b8dadcde57c8a5f612dc7b974d t/10test_script.t
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iQEcBAEBAgAGBQJRkrmMAAoJEK492j4Im1BpIpkIAMfGA91dkfqDxkg/1jRgf8aS
+yUQPFrC2yx5OLwyQg+sy3xlZsC+hSYZMUAJaLI+QUN7e5XPmDmrmft9LP/c50mdY
+Ow5DUdtJhYK5KF2P+U2ooR5PaxdMOGd7jQlCHGOlmodPk7mNyQJTcONu29yOC6zO
+pNDugvnAdBZOXSziGmO+nhBJpcQet5D7KgK87M6Z5QaTtv0OcUYel9z7gaK++mvY
+wAwLeRNOALCYbu6A6iox7yVTgJdEsls+ugLUB8cyYH0tZLjdNm7TGOJsFzmcsykO
+UGy5jMQGd9sshhwO/M5967Q93Rr1u9CYI+Uodva6vmG5ptoxcy1hrIJyt5Njfkc=
+=E5lo
+-----END PGP SIGNATURE-----
