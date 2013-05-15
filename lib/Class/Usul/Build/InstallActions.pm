@@ -1,8 +1,8 @@
-# @(#)$Ident: InstallActions.pm 2013-05-14 21:50 pjf ;
+# @(#)$Ident: InstallActions.pm 2013-05-15 01:19 pjf ;
 
 package Class::Usul::Build::InstallActions;
 
-use version; our $VERSION = qv( sprintf '0.20.%d', q$Rev: 1 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.20.%d', q$Rev: 2 $ =~ /\d+/gmx );
 
 use Class::Usul::Moose;
 use Class::Usul::Constants;
@@ -16,8 +16,7 @@ has 'builder' => is => 'ro', isa => 'Object', required => TRUE,
    handles    => [ qw(base_dir cli destdir install_destination
                       cli_info module_name) ];
 
-sub copy_files {
-   # Copy some files without overwriting
+sub copy_files { # Copy some files without overwriting
    my ($self, $cfg) = @_; my $cli = $self->cli;
 
    for my $pair (@{ $cfg->{copy_files} }) {
@@ -33,8 +32,7 @@ sub copy_files {
    return;
 }
 
-sub create_dirs {
-   # Create some directories that don't ship with the distro
+sub create_dirs { # Create some directories that don't ship with the distro
    my ($self, $cfg) = @_; my $cli = $self->cli;
 
    my $base = $self->_get_dest_base( $cfg );
@@ -48,8 +46,7 @@ sub create_dirs {
    return;
 }
 
-sub create_files {
-   # Create some empty log files
+sub create_files { # Create some empty log files
    my ($self, $cfg) = @_; my $cli = $self->cli;
 
    my $base = $self->_get_dest_base( $cfg );
@@ -90,7 +87,6 @@ sub edit_files {
 }
 
 # Private methods
-
 sub _get_dest_base {
    my ($self, $cfg) = @_;
 
@@ -110,7 +106,7 @@ Class::Usul::Build::InstallActions - Things to do after Build install
 
 =head1 Version
 
-Describes Class::Usul::Build::InstallActions version v0.20.$Rev: 1 $
+Describes Class::Usul::Build::InstallActions version v0.20.$Rev: 2 $
 
 =head1 Synopsis
 

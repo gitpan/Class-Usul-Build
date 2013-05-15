@@ -1,4 +1,4 @@
-# @(#)$Ident: Build.pm 2013-05-14 22:06 pjf ;
+# @(#)$Ident: Build.pm 2013-05-15 17:37 pjf ;
 
 package Class::Usul::Build;
 
@@ -6,7 +6,7 @@ use 5.01;
 use strict;
 use warnings;
 use feature qw(state);
-use version; our $VERSION = qv( sprintf '0.20.%d', q$Rev: 1 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.20.%d', q$Rev: 3 $ =~ /\d+/gmx );
 use parent 'Module::Build';
 use lib;
 
@@ -14,7 +14,7 @@ use Class::Usul::Build::InstallActions;
 use Class::Usul::Build::Questions;
 use Class::Usul::Build::VCS;
 use Class::Usul::Constants;
-use Class::Usul::Functions qw(classdir env_prefix say throw);
+use Class::Usul::Functions qw(classdir env_prefix emit throw);
 use Class::Usul::Programs;
 use Class::Usul::Time      qw(time2str);
 use Config;
@@ -31,6 +31,7 @@ use Try::Tiny;
 
 if ($ENV{AUTOMATED_TESTING}) {
    # Some CPAN testers set these. Breaks dependencies
+   $ENV{AUTHOR_TESTING  } = FALSE;
    $ENV{PERL_TEST_CRITIC} = FALSE; $ENV{PERL_TEST_POD} = FALSE;
    $ENV{TEST_CRITIC     } = FALSE; $ENV{TEST_POD     } = FALSE;
 }
@@ -66,7 +67,6 @@ my %CONFIG =
      time_format   => q(%Y-%m-%d %T %Z), );
 
 # Around these M::B actions
-
 sub ACTION_distmeta {
    my $self = shift;
 
@@ -313,7 +313,6 @@ sub skip_pattern {
 }
 
 # Private methods
-
 sub _archive_dir {
    return updir();
 }
@@ -345,8 +344,8 @@ sub _ask_questions {
 sub _commit_release {
    my ($self, $msg) = @_; my $vcs = $self->_vcs or return;
 
-   $vcs->commit( ucfirst $msg ) and say "Committed ${msg}";
-   $vcs->error and say @{ $vcs->error };
+   $vcs->commit( ucfirst $msg ) and emit "Committed ${msg}";
+   $vcs->error and emit @{ $vcs->error };
    return;
 }
 
@@ -631,7 +630,7 @@ sub _update_changelog {
           $text =~ s{ ^ ( \Q$tag\E .* ) $ }{$line}mx   }
    else { $text =~ s{   ( \Q$tok\E    )   }{$1\n\n$line}mx }
 
-   say 'Updating '.$cfg->{changes_file};
+   emit 'Updating '.$cfg->{changes_file};
    $io->print( $text );
    return;
 }
@@ -770,7 +769,7 @@ Class::Usul::Build - M::B utility methods
 
 =head1 Version
 
-This document describes Class::Usul::Build version v0.20.$Rev: 1 $
+This document describes Class::Usul::Build version v0.20.$Rev: 3 $
 
 =head1 Synopsis
 

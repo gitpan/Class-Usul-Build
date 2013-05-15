@@ -24,16 +24,16 @@ no_index:
 provides:
   Class::Usul::Build:
     file: lib/Class/Usul/Build.pm
-    version: v0.20.1
+    version: v0.20.3
   Class::Usul::Build::InstallActions:
     file: lib/Class/Usul/Build/InstallActions.pm
-    version: v0.20.1
+    version: v0.20.2
   Class::Usul::Build::Plugin::Debian:
     file: lib/Class/Usul/Build/Plugin/Debian.pm
-    version: v0.20.1
+    version: v0.20.2
   Class::Usul::Build::Questions:
     file: lib/Class/Usul/Build/Questions.pm
-    version: v0.20.1
+    version: v0.20.3
   Class::Usul::Build::VCS:
     file: lib/Class/Usul/Build/VCS.pm
     version: v0.20.1
@@ -48,6 +48,7 @@ requires:
   Module::Metadata: 1.000011
   Perl::Version: 1.011
   SVN::Class: 0.16
+  Software::License: 0.102341
   Text::Format: 0.53
   Try::Tiny: 0.09
   local::lib: 1.008004
@@ -57,4 +58,4 @@ resources:
   bugtracker: http://rt.cpan.org/NoAuth/Bugs.html?Dist=Class-Usul-Build
   homepage: http://www.roxsoft.co.uk
   license: http://dev.perl.org/licenses/
-version: v0.20.1
+version: v0.20.3

@@ -1,10 +1,10 @@
-# @(#)$Ident: Debian.pm 2013-05-14 21:49 pjf ;
+# @(#)$Ident: Debian.pm 2013-05-15 01:24 pjf ;
 
 package Class::Usul::Build::Plugin::Debian;
 
 use strict;
 use warnings;
-use version; our $VERSION = qv( sprintf '0.20.%d', q$Rev: 1 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.20.%d', q$Rev: 2 $ =~ /\d+/gmx );
 
 use Class::Usul::Constants;
 use Class::Usul::Functions qw(throw);
@@ -30,7 +30,6 @@ my %CONFIG =
      post_install   => FALSE, );
 
 # Around these M::B actions
-
 sub ACTION_distclean {
    my $self = shift;
 
@@ -40,7 +39,6 @@ sub ACTION_distclean {
 }
 
 # New M::B actions
-
 sub ACTION_debian  {
    my $self = shift;
 
@@ -73,7 +71,6 @@ sub ACTION_debianclean {
 }
 
 # Private action methods
-
 sub _create_debian_package {
    my ($self, $cfg) = @_; my $cli = $self->cli;
 
@@ -115,7 +112,6 @@ sub _debianclean {
 }
 
 # Private methods
-
 sub _abs_prog_path {
    my ($self, $cfg, $cmd) = @_; my ($prog, @args) = split SPC, $cmd || NUL;
 
@@ -151,7 +147,7 @@ sub _backup_path {
       $bak->is_dir ? $bak->rmtree : $bak->unlink;
    }
 
-   rename $path, $bak->pathname or throw $ERRNO;
+   rename $path, $bak->pathname or throw $OS_ERROR;
    return;
 }
 
@@ -243,7 +239,7 @@ sub _create_debian_rules {
    unshift @lines, "\n", "override_dh_auto_configure:\n", "\n",
       "override_dh_auto_build:\n", "\n", $line1;
    $rules->lines( \@lines ); $rules->write;
-   chmod 0755, $path or throw $ERRNO;
+   chmod 0755, $path or throw $OS_ERROR;
    return $rules;
 }
 
@@ -446,7 +442,6 @@ sub _update_debian_file_list {
 }
 
 # Private functions
-
 sub __bin_dir {
    return catdir( $_[ 0 ]->{base}, q(bin) );
 }
@@ -464,7 +459,7 @@ Class::Usul::Build::Debian - Create a Debian package from a standalone applicati
 
 =head1 Version
 
-This documents version v0.20.$Rev: 1 $
+This documents version v0.20.$Rev: 2 $
 
 =head1 Synopsis
 

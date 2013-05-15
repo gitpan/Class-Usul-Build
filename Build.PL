@@ -1,9 +1,9 @@
-# @(#)$Ident: Build.PL 2013-05-14 22:05 pjf ;
+# @(#)$Ident: Build.PL 2013-05-15 01:16 pjf ;
 
 use strict;
 use warnings;
 use inc::Bob; # Module::Build subclass
-use version; our $VERSION = qv( sprintf '0.20.%d', q$Rev: 1 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.20.%d', q$Rev: 2 $ =~ /\d+/gmx );
 
 Bob->new( {
    module    => q(Class::Usul::Build),
@@ -18,6 +18,7 @@ Bob->new( {
       'Module::Metadata'    => 1.000011,
       'MRO::Compat'         => 0.11,
       'Perl::Version'       => 1.011,
+      'Software::License'   => 0.102341,
       'SVN::Class'          => 0.16,
       'Text::Format'        => 0.53,
       'Try::Tiny'           => 0.09, },

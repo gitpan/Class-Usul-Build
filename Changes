@@ -1,6 +1,8 @@
 Revision history for Class::Usul::Build
 
-0.20.1    2013-05-14 23:24:08
+0.20.3    2013-05-15 18:50:43
+          - Renamed Class::Usul::Functions::say to emit
+          - Added missing dependency
           - Bumped version for PAUSE indexer
 
 0.1.5     2013-05-14 23:06:42

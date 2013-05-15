@@ -1,12 +1,12 @@
-# @(#)$Ident: Questions.pm 2013-05-14 21:50 pjf ;
+# @(#)$Ident: Questions.pm 2013-05-15 17:37 pjf ;
 
 package Class::Usul::Build::Questions;
 
-use version; our $VERSION = qv( sprintf '0.20.%d', q$Rev: 1 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.20.%d', q$Rev: 3 $ =~ /\d+/gmx );
 
 use Class::Usul::Moose;
 use Class::Usul::Constants;
-use Class::Usul::Functions qw(class2appdir say throw);
+use Class::Usul::Functions qw(class2appdir emit throw);
 use File::Spec::Functions  qw(catdir);
 
 has 'builder'           => is => 'ro', isa => 'Object', required => TRUE,
@@ -28,7 +28,7 @@ sub q_built {
 
    $cfg->{base} = catdir( $prefix, class2appdir $self->module_name,
                           q(v).$cfg->{ver}.q(p).$cfg->{phase} );
-   say;
+   emit;
    return TRUE;
 }
 
@@ -105,7 +105,7 @@ Class::Usul::Build::Questions - Things to ask when Build runs install
 
 =head1 Version
 
-Describes Class::Usul::Build::Questions version v0.20.$Rev: 1 $
+Describes Class::Usul::Build::Questions version v0.20.$Rev: 3 $
 
 =head1 Synopsis
 
