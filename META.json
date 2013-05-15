@@ -40,7 +40,7 @@
             "DhMakePerl" : "0.72"
          },
          "requires" : {
-            "Class::Usul" : "v0.20.0",
+            "Class::Usul" : "v0.21.0",
             "Email::Date::Format" : "1.002",
             "Git::Class" : "0.12",
             "MRO::Compat" : "0.11",
@@ -59,7 +59,7 @@
    "provides" : {
       "Class::Usul::Build" : {
          "file" : "lib/Class/Usul/Build.pm",
-         "version" : "v0.20.3"
+         "version" : "v0.20.4"
       },
       "Class::Usul::Build::InstallActions" : {
          "file" : "lib/Class/Usul/Build/InstallActions.pm",
@@ -88,5 +88,5 @@
          "http://dev.perl.org/licenses/"
       ]
    },
-   "version" : "v0.20.3"
+   "version" : "v0.20.4"
 }

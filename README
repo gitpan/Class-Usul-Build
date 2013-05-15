@@ -2,7 +2,7 @@ Name
     Class::Usul::Build - M::B utility methods
 
 Version
-    This document describes Class::Usul::Build version v0.20.$Rev: 3 $
+    This document describes Class::Usul::Build version v0.20.$Rev: 4 $
 
 Synopsis
        use Class::Usul::Build;
