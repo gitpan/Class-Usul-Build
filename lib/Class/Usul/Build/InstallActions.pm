@@ -2,7 +2,7 @@
 
 package Class::Usul::Build::InstallActions;
 
-use version; our $VERSION = qv( sprintf '0.20.%d', q$Rev: 2 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.21.%d', q$Rev: 1 $ =~ /\d+/gmx );
 
 use Class::Usul::Moose;
 use Class::Usul::Constants;
@@ -106,7 +106,7 @@ Class::Usul::Build::InstallActions - Things to do after Build install
 
 =head1 Version
 
-Describes Class::Usul::Build::InstallActions version v0.20.$Rev: 2 $
+Describes Class::Usul::Build::InstallActions version v0.21.$Rev: 1 $
 
 =head1 Synopsis
 

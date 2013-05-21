@@ -1,32 +1,31 @@
-# @(#)$Ident: Build.pm 2013-05-15 20:30 pjf ;
+# @(#)$Ident: Build.pm 2013-05-21 12:24 pjf ;
 
 package Class::Usul::Build;
 
 use 5.01;
 use strict;
 use warnings;
-use feature qw(state);
-use version; our $VERSION = qv( sprintf '0.20.%d', q$Rev: 4 $ =~ /\d+/gmx );
-use parent 'Module::Build';
+use feature                 qw(state);
+use version; our $VERSION = qv( sprintf '0.21.%d', q$Rev: 1 $ =~ /\d+/gmx );
+use parent                  qw(Module::Build);
 use lib;
 
 use Class::Usul::Build::InstallActions;
 use Class::Usul::Build::Questions;
-use Class::Usul::Build::VCS;
 use Class::Usul::Constants;
-use Class::Usul::Functions qw(classdir env_prefix emit throw);
+use Class::Usul::Functions  qw(classdir env_prefix emit throw);
 use Class::Usul::Programs;
-use Class::Usul::Time      qw(time2str);
+use Class::Usul::Time       qw(time2str);
 use Config;
-use English                qw(-no_match_vars);
-use File::Basename         qw(dirname);
-use File::Copy             qw(copy);
-use File::Find             qw(find);
-use File::Spec::Functions  qw(catdir catfile updir);
+use English                 qw(-no_match_vars);
+use File::Basename          qw(dirname);
+use File::Copy              qw(copy);
+use File::Find              qw(find);
+use File::Spec::Functions   qw(catdir catfile updir);
 use Module::Metadata;
 use MRO::Compat;
 use Perl::Version;
-use Scalar::Util           qw(blessed);
+use Scalar::Util            qw(blessed);
 use Try::Tiny;
 
 if ($ENV{AUTOMATED_TESTING}) {
@@ -46,21 +45,8 @@ my %CONFIG =
      create_ugrps  => TRUE,
      edit_files    => TRUE,
      install       => TRUE,
-     license_file  => q(LICENSE),
      line_format   => q(%-9s %s),
      local_lib     => q(local),
-     manifest_file => q(MANIFEST),
-     meta_keys     => {
-        perl       => 'Perl_5',
-        perl_5     => 'Perl_5',
-        apache     => [ map { "Apache_$_" } qw(1_1 2_0) ],
-        artistic   => 'Artistic_1_0',
-        artistic_2 => 'Artistic_2_0',
-        lgpl       => [ map { "LGPL_$_" } qw(2_1 3_0) ],
-        bsd        => 'BSD',
-        gpl        => [ map { "GPL_$_" } qw(1 2 3) ],
-        mit        => 'MIT',
-        mozilla    => [ map { "Mozilla_$_" } qw(1_0 1_1) ], },
      path_prefix   => [ NUL, qw(opt) ],
      phase         => 1,
      pwidth        => 50,
@@ -183,17 +169,6 @@ sub ACTION_local_archive {
    return;
 }
 
-sub ACTION_release {
-   my $self = shift;
-
-   $self->depends_on( q(distmeta) );
-
-   try   { $self->_commit_release( 'release '.$self->_dist_version ) }
-   catch { $self->cli->fatal( $_ ) };
-
-   return;
-}
-
 sub ACTION_restore_local_archive {
    my $self = shift;
 
@@ -213,20 +188,6 @@ sub ACTION_standalone {
    $self->depends_on( q(install_local_deps) );
    $self->depends_on( q(manifest) );
    $self->depends_on( q(dist) );
-   return;
-}
-
-sub ACTION_uninstall {
-   my $self = shift;
-
-   try {
-      my $cfg = $self->_get_config;
-
-      $self->_set_install_paths( $cfg );
-      $self->_uninstall( $cfg );
-   }
-   catch { $self->cli->fatal( $_ ) };
-
    return;
 }
 
@@ -293,16 +254,6 @@ sub process_local_files { # Will copy the local lib into the blib
    my $self = shift; return $self->process_files( q(local) );
 }
 
-sub public_repository { # Accessor for the public VCS repository information
-   my $class = shift; my $repo = $class->repository or return;
-
-   return $repo !~ m{ \A file: }mx ? $repo : undef;
-}
-
-sub repository {
-   my $vcs = shift->_vcs or return; return $vcs->repository;
-}
-
 sub skip_pattern {
    # Accessor/mutator for the regular expression of paths not to process
    my ($self, $re) = @_;
@@ -338,14 +289,6 @@ sub _ask_questions {
 
    $self->cli_info( 'Saving post install config to '.$args->{path} );
    $cli->file->dataclass_schema( $cfg->{config_attrs} )->dump( $args );
-   return;
-}
-
-sub _commit_release {
-   my ($self, $msg) = @_; my $vcs = $self->_vcs or return;
-
-   $vcs->commit( ucfirst $msg ) and emit "Committed ${msg}";
-   $vcs->error and emit @{ $vcs->error };
    return;
 }
 
@@ -607,15 +550,6 @@ sub _setup_plugins {
           search_paths => [ q(::Build::Plugin) ], } );
 }
 
-sub _uninstall {
-   my ($self, $cfg) = @_;
-
-   $self->_run_bin_cmd( $cfg, q(uninstall) )
-      and $self->cli_info( 'Uninstall complete' );
-
-   return;
-}
-
 sub _update_changelog {
    my ($self, $cfg, $ver) = @_;
 
@@ -633,20 +567,6 @@ sub _update_changelog {
    emit 'Updating '.$cfg->{changes_file};
    $io->print( $text );
    return;
-}
-
-sub _vcs {
-   my $self = shift; state $cache; $cache and return $cache;
-
-   my $is_blessed = blessed $self ? TRUE : FALSE;
-   my $dir = $is_blessed ? $self->cli->config->appldir : File::Spec->curdir;
-   my $vcs = $self->_vcs_class->new( project_dir => $dir );
-
-   return $is_blessed ? $cache = $vcs : $vcs;
-}
-
-sub _vcs_class {
-   return __PACKAGE__.q(::VCS);
 }
 
 # Private functions
@@ -769,7 +689,7 @@ Class::Usul::Build - M::B utility methods
 
 =head1 Version
 
-This document describes Class::Usul::Build version v0.20.$Rev: 4 $
+This document describes Class::Usul::Build version v0.21.$Rev: 1 $
 
 =head1 Synopsis
 
@@ -857,19 +777,6 @@ install the dependent module
 
 Creates a tarball of the local lib directory
 
-=head2 ACTION_prereq_diff
-
-=head2 prereq_diff
-
-Creates a report showing the difference between what C<Build.PL> has in it
-and what it should have in it
-
-=head2 ACTION_release
-
-=head2 release
-
-Commits the current working copy as the next release
-
 =head2 ACTION_restore_local_archive
 
 =head2 restore_local_archive
@@ -881,18 +788,6 @@ Unpacks an archive tarball of the local lib directory
 =head2 standalone
 
 Locally installs local lib and all dependencies
-
-=head2 ACTION_uninstall
-
-=head2 uninstall
-
-Uninstalls the application
-
-=head2 ACTION_upload
-
-=head2 upload
-
-Upload distribution to CPAN
 
 =head1 Subroutines/Methods
 
@@ -914,20 +809,6 @@ interface object
    $builder->cli_info( @list_of_messages );
 
 Calls L<info|Class::Usul::Programs/info> on the L<client object|/cli>
-
-=head2 _commit_release
-
-   $builder->_commit_release( $config, 'Release message for VCS log' );
-
-Commits the release to the VCS
-
-=head2 _cpan_upload
-
-   $builder->_cpan_upload;
-
-Called by L</ACTION_upload>. Uses L<CPAN::Uploader> (which it loads on
-demand) to do the lifting. Reads from the users F<.pause> in their
-C<$ENV{HOME}> directory
 
 =head2 dispatch
 
@@ -972,25 +853,10 @@ is optional and defaults to B<blib>
 
 Calls L</process_file> setting the source to I<local>
 
-=head2 public_repository
-
-Return the URI of the SVN repository for this project. Return undef
-if we are not using svn or the repository is a local file path
-
 =head2 question_class
 
 Returns the class name of the class which contains the questions that are
 asked when the application is installed
-
-=head2 replace
-
-   $builder->replace( $this, $that, $path );
-
-Substitutes C<$this> string for C<$that> string in the file F<$path>
-
-=head2 repository
-
-Returns the URI of the VCS repository for this project
 
 =head2 set_base_path
 
@@ -1011,11 +877,6 @@ that match this pattern. Set to false to not have a skip list
 =head2 update_changelog
 
 Update the version number and date/time stamp in the F<Changes> file
-
-=head2 write_license_file
-
-Instantiates an instance of L<Software::License>, fills in the copyright
-holder information and writes a F<LICENSE> file
 
 =head1 Private Methods
 
@@ -1038,11 +899,17 @@ Edits and stores config information in the file F<build.json>
 
 =over 3
 
-=item L<Class::Usul::Programs>
+=item L<Class::Usul>
 
 =item L<Module::Build>
 
-=item L<XML::Simple>
+=item L<Module::Metadata>
+
+=item L<MRO::Compat>
+
+=item L<Perl::Version>
+
+=item L<Try::Tiny>
 
 =back
 

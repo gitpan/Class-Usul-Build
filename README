@@ -2,7 +2,7 @@ Name
     Class::Usul::Build - M::B utility methods
 
 Version
-    This document describes Class::Usul::Build version v0.20.$Rev: 4 $
+    This document describes Class::Usul::Build version v0.21.$Rev: 1 $
 
 Synopsis
        use Class::Usul::Build;
@@ -69,15 +69,6 @@ ACTIONS
   local_archive
     Creates a tarball of the local lib directory
 
-  ACTION_prereq_diff
-  prereq_diff
-    Creates a report showing the difference between what "Build.PL" has in
-    it and what it should have in it
-
-  ACTION_release
-  release
-    Commits the current working copy as the next release
-
   ACTION_restore_local_archive
   restore_local_archive
     Unpacks an archive tarball of the local lib directory
@@ -85,14 +76,6 @@ ACTIONS
   ACTION_standalone
   standalone
     Locally installs local lib and all dependencies
-
-  ACTION_uninstall
-  uninstall
-    Uninstalls the application
-
-  ACTION_upload
-  upload
-    Upload distribution to CPAN
 
 Subroutines/Methods
   class_path
@@ -110,18 +93,6 @@ Subroutines/Methods
        $builder->cli_info( @list_of_messages );
 
     Calls info on the client object
-
-  _commit_release
-       $builder->_commit_release( $config, 'Release message for VCS log' );
-
-    Commits the release to the VCS
-
-  _cpan_upload
-       $builder->_cpan_upload;
-
-    Called by "ACTION_upload". Uses CPAN::Uploader (which it loads on
-    demand) to do the lifting. Reads from the users .pause in their
-    $ENV{HOME} directory
 
   dispatch
     Overloads the M::B method. Calls "_setup_plugins" then the parent method
@@ -158,21 +129,9 @@ Subroutines/Methods
   process_local_files
     Calls "process_file" setting the source to *local*
 
-  public_repository
-    Return the URI of the SVN repository for this project. Return undef if
-    we are not using svn or the repository is a local file path
-
   question_class
     Returns the class name of the class which contains the questions that
     are asked when the application is installed
-
-  replace
-       $builder->replace( $this, $that, $path );
-
-    Substitutes $this string for $that string in the file $path
-
-  repository
-    Returns the URI of the VCS repository for this project
 
   set_base_path
        $base = $builder->set_base_path( $config );
@@ -191,10 +150,6 @@ Subroutines/Methods
   update_changelog
     Update the version number and date/time stamp in the Changes file
 
-  write_license_file
-    Instantiates an instance of Software::License, fills in the copyright
-    holder information and writes a LICENSE file
-
 Private Methods
   _copy_file
        $builder->_copy_file( $source, $destination );
@@ -209,9 +164,12 @@ Configuration and Environment
     Edits and stores config information in the file build.json
 
 Dependencies
-    Class::Usul::Programs
+    Class::Usul
     Module::Build
-    XML::Simple
+    Module::Metadata
+    MRO::Compat
+    Perl::Version
+    Try::Tiny
 
 Incompatibilities
     There are no known incompatibilities in this module

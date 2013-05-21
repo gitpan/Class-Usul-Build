@@ -5,9 +5,7 @@ inc/CPANTesting.pm
 inc/SubClass.pm
 lib/Class/Usul/Build.pm
 lib/Class/Usul/Build/InstallActions.pm
-lib/Class/Usul/Build/Plugin/Debian.pm
 lib/Class/Usul/Build/Questions.pm
-lib/Class/Usul/Build/VCS.pm
 LICENSE
 MANIFEST			This list of files
 META.json
