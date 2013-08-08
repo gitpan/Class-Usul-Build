@@ -1,5 +1,5 @@
 ---
-abstract: 'M::B utility methods'
+abstract: 'Module::Build methods for standalone applications'
 author:
   - unknown
 build_requires:
@@ -24,26 +24,28 @@ no_index:
 provides:
   Class::Usul::Build:
     file: lib/Class/Usul/Build.pm
-    version: v0.21.1
+    version: v0.22.3
   Class::Usul::Build::InstallActions:
     file: lib/Class/Usul/Build/InstallActions.pm
-    version: v0.21.1
+    version: v0.22.2
   Class::Usul::Build::Questions:
     file: lib/Class/Usul/Build/Questions.pm
-    version: v0.21.1
+    version: v0.22.2
 recommends:
   App::cpanminus: 1.6005
 requires:
-  Class::Usul: v0.21.0
+  Class::Usul: v0.23.0
   MRO::Compat: 0.11
   Module::Metadata: 1.000011
+  Moo: 1.003
   Perl::Version: 1.011
   Try::Tiny: 0.09
   local::lib: 1.008004
+  namespace::sweep: 0.006
   parent: 0.224
   perl: 5.01
 resources:
   bugtracker: http://rt.cpan.org/NoAuth/Bugs.html?Dist=Class-Usul-Build
   homepage: http://www.roxsoft.co.uk
   license: http://dev.perl.org/licenses/
-version: v0.21.1
+version: v0.22.3

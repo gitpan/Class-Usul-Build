@@ -1,6 +1,12 @@
 Revision history for Class::Usul::Build
 
+0.22.3    2013-08-08 14:52:28
+          - Updated toolchain
+          - Fixed POD errors
+          - Mooified
+
 0.21.1    2013-05-21 13:30:36
+          - Ignore plugin in Git
           - Moved Debian plugin to own dist
 
 0.20.4    2013-05-15 21:30:56

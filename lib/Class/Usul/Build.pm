@@ -1,4 +1,4 @@
-# @(#)$Ident: Build.pm 2013-05-21 12:24 pjf ;
+# @(#)$Ident: Build.pm 2013-08-08 13:51 pjf ;
 
 package Class::Usul::Build;
 
@@ -6,7 +6,7 @@ use 5.01;
 use strict;
 use warnings;
 use feature                 qw(state);
-use version; our $VERSION = qv( sprintf '0.21.%d', q$Rev: 1 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.22.%d', q$Rev: 3 $ =~ /\d+/gmx );
 use parent                  qw(Module::Build);
 use lib;
 
@@ -39,7 +39,6 @@ my %CONFIG =
    ( changes_file  => q(Changes),
      change_token  => q({{ $NEXT }}),
      cpan_authors  => q(http://search.cpan.org/CPAN/authors/id),
-     cpan_dists    => q(http://search.cpan.org/dist),
      config_attrs  => { storage_class => q(JSON) },
      config_file   => [ qw(var etc build.json) ],
      create_ugrps  => TRUE,
@@ -47,7 +46,6 @@ my %CONFIG =
      install       => TRUE,
      line_format   => q(%-9s %s),
      local_lib     => q(local),
-     path_prefix   => [ NUL, qw(opt) ],
      phase         => 1,
      pwidth        => 50,
      time_format   => q(%Y-%m-%d %T %Z), );
@@ -685,11 +683,11 @@ __END__
 
 =head1 Name
 
-Class::Usul::Build - M::B utility methods
+Class::Usul::Build - Module::Build methods for standalone applications
 
 =head1 Version
 
-This document describes Class::Usul::Build version v0.21.$Rev: 1 $
+This document describes Class::Usul::Build version v0.22.$Rev: 3 $
 
 =head1 Synopsis
 

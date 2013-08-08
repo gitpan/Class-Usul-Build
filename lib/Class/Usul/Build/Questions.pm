@@ -1,24 +1,26 @@
-# @(#)$Ident: Questions.pm 2013-05-15 17:37 pjf ;
+# @(#)$Ident: Questions.pm 2013-06-25 22:59 pjf ;
 
 package Class::Usul::Build::Questions;
 
-use version; our $VERSION = qv( sprintf '0.21.%d', q$Rev: 1 $ =~ /\d+/gmx );
+use namespace::sweep;
+use version; our $VERSION = qv( sprintf '0.22.%d', q$Rev: 2 $ =~ /\d+/gmx );
 
-use Class::Usul::Moose;
 use Class::Usul::Constants;
-use Class::Usul::Functions qw(class2appdir emit throw);
-use File::Spec::Functions  qw(catdir);
+use Class::Usul::Functions  qw( class2appdir emit throw );
+use Class::Usul::Types      qw( ArrayRef HashRef Object );
+use File::Spec::Functions   qw( catdir );
+use Moo;
 
-has 'builder'           => is => 'ro', isa => 'Object', required => TRUE,
+has 'builder'           => is => 'ro', isa => Object, required => TRUE,
    handles              => { cli          => q(cli),
                              dist_version => q(_dist_version),
                              module_name  => q(module_name) };
 
-has 'config_attributes' => is => 'ro', isa => 'ArrayRef',
+has 'config_attributes' => is => 'ro', isa => ArrayRef,
    default              => sub {
       [ qw(path_prefix ver phase install post_install built) ] };
 
-has 'paragraph'         => is => 'ro', isa => 'HashRef',
+has 'paragraph'         => is => 'ro', isa => HashRef,
    default              => sub { { cl => TRUE, fill => TRUE, nl => TRUE } };
 
 sub q_built {
@@ -105,7 +107,7 @@ Class::Usul::Build::Questions - Things to ask when Build runs install
 
 =head1 Version
 
-Describes Class::Usul::Build::Questions version v0.21.$Rev: 1 $
+Describes Class::Usul::Build::Questions version v0.22.$Rev: 2 $
 
 =head1 Synopsis
 
@@ -113,6 +115,22 @@ Describes Class::Usul::Build::Questions version v0.21.$Rev: 1 $
 
 All question methods are passed C<$config> and return the new value
 for one of it's attributes
+
+=head1 Configuration and Environment
+
+Edits and stores config information in the file F<build.json>
+
+Defines the following attributes
+
+=over 3
+
+=item C<builder>
+
+=item C<config_attributes>
+
+=item C<paragraph>
+
+=back
 
 =head1 Subroutines/Methods
 
@@ -148,10 +166,6 @@ upon this value
 =head2 q_ver
 
 Dummy question returns the version part of the installation directory
-
-=head1 Configuration and Environment
-
-Edits and stores config information in the file F<build.json>
 
 =head1 Diagnostics
 
