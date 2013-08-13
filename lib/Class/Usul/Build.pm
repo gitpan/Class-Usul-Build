@@ -6,7 +6,7 @@ use 5.01;
 use strict;
 use warnings;
 use feature                 qw(state);
-use version; our $VERSION = qv( sprintf '0.22.%d', q$Rev: 3 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.23.%d', q$Rev: 1 $ =~ /\d+/gmx );
 use parent                  qw(Module::Build);
 use lib;
 
@@ -687,7 +687,7 @@ Class::Usul::Build - Module::Build methods for standalone applications
 
 =head1 Version
 
-This document describes Class::Usul::Build version v0.22.$Rev: 3 $
+This document describes Class::Usul::Build version v0.23.$Rev: 1 $
 
 =head1 Synopsis
 

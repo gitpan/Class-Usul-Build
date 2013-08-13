@@ -2,7 +2,7 @@ Name
     Class::Usul::Build - Module::Build methods for standalone applications
 
 Version
-    This document describes Class::Usul::Build version v0.22.$Rev: 3 $
+    This document describes Class::Usul::Build version v0.23.$Rev: 1 $
 
 Synopsis
        use Class::Usul::Build;

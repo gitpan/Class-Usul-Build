@@ -1,10 +1,10 @@
 {
    "abstract" : "Module::Build methods for standalone applications",
    "author" : [
-      "unknown"
+      "Peter Flanigan <pjfl@cpan.org>"
    ],
-   "dynamic_config" : 1,
-   "generated_by" : "Module::Build version 0.4004, CPAN::Meta::Converter version 2.120921",
+   "dynamic_config" : "1",
+   "generated_by" : "Dist::Zilla version 4.300033, CPAN::Meta::Converter version 2.120921",
    "license" : [
       "perl_5"
    ],
@@ -35,46 +35,44 @@
          }
       },
       "runtime" : {
-         "recommends" : {
-            "App::cpanminus" : "1.6005"
-         },
          "requires" : {
             "Class::Usul" : "v0.23.0",
             "MRO::Compat" : "0.11",
             "Module::Metadata" : "1.000011",
-            "Moo" : "1.003",
+            "Moo" : "1.003000",
             "Perl::Version" : "1.011",
             "Try::Tiny" : "0.09",
             "local::lib" : "1.008004",
             "namespace::sweep" : "0.006",
-            "parent" : "0.224",
-            "perl" : "5.01"
+            "parent" : "0.224"
          }
       }
    },
    "provides" : {
       "Class::Usul::Build" : {
          "file" : "lib/Class/Usul/Build.pm",
-         "version" : "v0.22.3"
+         "version" : "v0.23.1"
       },
       "Class::Usul::Build::InstallActions" : {
          "file" : "lib/Class/Usul/Build/InstallActions.pm",
-         "version" : "v0.22.2"
+         "version" : "v0.23.1"
       },
       "Class::Usul::Build::Questions" : {
          "file" : "lib/Class/Usul/Build/Questions.pm",
-         "version" : "v0.22.2"
+         "version" : "v0.23.1"
       }
    },
    "release_status" : "stable",
    "resources" : {
       "bugtracker" : {
+         "mailto" : "pjfl@cpan.org",
          "web" : "http://rt.cpan.org/NoAuth/Bugs.html?Dist=Class-Usul-Build"
       },
-      "homepage" : "http://www.roxsoft.co.uk",
+      "homepage" : "https://metacpan.org/author/PJFL",
       "license" : [
          "http://dev.perl.org/licenses/"
       ]
    },
-   "version" : "v0.22.3"
+   "version" : "0.23.1"
 }
+

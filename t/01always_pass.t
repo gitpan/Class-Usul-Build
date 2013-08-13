@@ -1,4 +1,4 @@
-# @(#)Ident: 01always_pass.t 2013-08-06 18:57 pjf ;
+# @(#)Ident: 01always_pass.t 2013-08-12 17:50 pjf ;
 
 use strict;
 use warnings;
@@ -8,9 +8,9 @@ use Sys::Hostname;
 
 my $osname  = lc $^O;
 my $host    = lc hostname;
-my $current = eval { Module::Build->current };
-my $notes   = {}; $current and $notes = $current->notes || {};
-my $version = defined $notes->{version} ? $notes->{version} : '< 1.6';
+my $builder = eval { Module::Build->current };
+my $notes   = {}; $builder and $notes = $builder->notes || {};
+my $version = defined $notes->{version} ? $notes->{version} : 'undef';
 
 sub diag_version {
    my ($module, $version) = @_;
@@ -30,7 +30,7 @@ sub diag_env {
                                                       ? $ENV{ $var } : 'undef';
 }
 
-$notes->{is_cpan_testing}
+$notes->{is_reporting}
    and warn "OS: ${osname}, Host: ${host}, Bob-Version: ${version}\n";
 
 while (<DATA>) {
@@ -49,6 +49,7 @@ exit 0;
 # mode: perl
 # tab-width: 3
 # End:
+# vim: expandtab shiftwidth=3:
 
 __END__
 # Required:
@@ -69,3 +70,4 @@ $EXTENDED_TESTING
 $AUTHOR_TESTING
 $TEST_CRITIC
 $TEST_SPELLING
+$PERL5_CPANPLUS_IS_VERSION
